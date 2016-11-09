@@ -11,6 +11,7 @@ import TimeAgo from 'react-native-timeago';
 import Moment from 'moment';
 import Striptags from 'striptags';
 import HTMLView from 'react-native-htmlview';
+import { BlurView, VibrancyView } from 'react-native-blur';
 
 // https://github.com/oblador/react-native-progress
 // import * as Progress from 'react-native-progress';
@@ -62,11 +63,17 @@ class Row extends Component {
     let imageParent = data.attachments[0];
     let viewNews = () => Actions.ViewNews({post: data});
     console.log(imageParent);
+    const background = 'http://iphonewallpapers-hd.com/thumbs/firework_iphone_wallpaper_5-t2.jpg';
 
     return(
       <View style={styles.container}>
         <TouchableOpacity activeOpacity={1} onPress={viewNews}>
           { (data.thumbnail) && <Image style={styles.imageContent} source={{uri:data.thumbnail}}/>}
+          <Image source={{uri:data.thumbnail}} style={styles.imageContent}>
+            <BlurView blurType="light" blurAmount={60} style={styles.blur}>
+              <Text>Hi, I am a tiny menu item</Text>
+            </BlurView>
+          </Image>
           <Text style={styles.title}>{data.title}</Text>
           <HTMLView
             value={data.excerpt}
