@@ -37,11 +37,11 @@ class ShareButton extends React.Component {
 
 var styles = StyleSheet.create({
     button: {
-      marginRight: 15,
-      borderWidth: StyleSheet.hairlineWidth,
-      borderColor: 'rgba(0,0,0,0.2)',
-      backgroundColor: 'rgba(255,255,255,.6)',
-      borderRadius: 16,
+      marginRight: 10,
+      // borderWidth: StyleSheet.hairlineWidth,
+      // borderColor: 'rgba(0,0,0,0.2)',
+      // backgroundColor: 'rgba(255,255,255,.6)',
+      // borderRadius: 16,
       width: 32,
       height: 32,
       justifyContent: 'center',
@@ -49,11 +49,11 @@ var styles = StyleSheet.create({
     },
     buttonImg: {
       marginTop: 0,
-      tintColor: Colors.themeRed,
+      tintColor: 'white',
       // marginTop: 2,
-      width: 20,
-      height: 20,
-      marginLeft: 5,
+      // width: 20,
+      // height: 20,
+      // marginLeft: 5,
     }
 });
 

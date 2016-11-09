@@ -20,10 +20,10 @@ class BackButton extends React.Component {
 
 var styles = StyleSheet.create({
     button: {
-      marginLeft: 12,
-      borderWidth: StyleSheet.hairlineWidth,
-      borderColor: 'rgba(0,0,0,0.2)',
-      backgroundColor: 'rgba(255,255,255,.6)',
+      marginLeft: 5,
+      // borderWidth: StyleSheet.hairlineWidth,
+      // borderColor: 'rgba(0,0,0,0.2)',
+      // backgroundColor: 'rgba(255,255,255,.6)',
       borderRadius: 16,
       width: 32,
       height: 32,
@@ -38,10 +38,10 @@ var styles = StyleSheet.create({
       // }
     },
     buttonImg: {
-      tintColor: Colors.themeRed,
+      tintColor: 'white',
       // marginTop: 2,
-      width: 20,
-      height: 20,
+      // width: 20,
+      // height: 20,
 
     }
 });

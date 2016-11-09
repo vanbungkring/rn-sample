@@ -57,7 +57,7 @@ export default class ViewNews extends Component {
 
           renderStickyHeader={() => (
             <View key="sticky-header" style={styles.stickySection}>
-              <Text style={styles.stickySectionText}></Text>
+              <Text style={styles.stickySectionText}>Islami.co</Text>
             </View>
           )}
 
@@ -140,8 +140,9 @@ var styles = StyleSheet.create({
   stickySection: {
     height: STICKY_HEADER_HEIGHT,
     // width: 300,
-    justifyContent: 'flex-end',
+    justifyContent: 'center',
     backgroundColor: Colors.themeRed,
+    alignItems: 'center'
   },
   stickySectionText: {
     color: 'white',
