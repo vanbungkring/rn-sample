@@ -8,11 +8,13 @@ import {
  } from 'react-native';
 import { Actions } from 'react-native-router-flux';
 
+
 import GLOBAL from '../../constants/Global';
 import GlobalStyles from '../../constants/Styles';
+import Row from './RowCell';
 
-var API_URL = 'https://facebook.github.io/react-native/movies.json'
-var API_URL2 = 'http://islami.co/api/get_recent_posts/';
+// var API_URL = 'https://facebook.github.io/react-native/movies.json'
+var API_URL = 'http://islami.co/api/get_recent_posts/';
 
 
 export default class ListNews extends Component {
@@ -29,17 +31,16 @@ export default class ListNews extends Component {
 
   componentDidMount() {
     this.fetchData();
-    this.fetchData2();
   }
 
   fetchData() {
     fetch(API_URL, {
       method: 'GET',
-      // headers: {
-      //   'Accept': 'application/json',
-      //   'Content-Type': 'application/json',
-      //   // 'Authorization': 'Basic ' + base64.encode(USERNAME+':'+PASSWORD),
-      // },
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+        // 'Authorization': 'Basic ' + base64.encode(USERNAME+':'+PASSWORD),
+      },
       // body: JSON.stringify({
         // username: USERNAME,
         // basicAuthKey: PASSWORD,
@@ -47,37 +48,10 @@ export default class ListNews extends Component {
     })
       .then((response) => response.json())
       .then((responseData) => {
-        //console.log(responseData);
+        // console.log(responseData.posts);
         this.setState({
-          dataSource: this.state.dataSource.cloneWithRows(responseData.movies),
+          dataSource: this.state.dataSource.cloneWithRows(responseData.posts),
           loaded: true,
-        });
-      })
-      .catch((error) => {
-        console.error(error);
-      })
-      .done();
-  }
-
-  fetchData2() {
-    fetch(API_URL, {
-      method: 'GET',
-      // headers: {
-      //   'Accept': 'application/json',
-      //   'Content-Type': 'application/json',
-      //   // 'Authorization': 'Basic ' + base64.encode(USERNAME+':'+PASSWORD),
-      // },
-      // body: JSON.stringify({
-        // username: USERNAME,
-        // basicAuthKey: PASSWORD,
-      // })
-    })
-      .then((response) => response.json())
-      .then((responseData) => {
-        console.log(responseData);
-        this.setState({
-          // dataSource: this.state.dataSource.cloneWithRows(responseData.movies),
-          // loaded: true,
         });
       })
       .catch((error) => {
@@ -111,7 +85,8 @@ export default class ListNews extends Component {
             />
           }
           dataSource={this.state.dataSource}
-          renderRow={this.renderList}
+          // renderRow={this.renderList}
+          renderRow={(data) => <Row {...data} />}
           style={styles.listView}
         />
       </View>

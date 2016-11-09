@@ -12,6 +12,7 @@ const GlobalStyles = StyleSheet.create({
     backgroundColor: 'white',
     padding: 0,
     margin: 0,
+    marginTop: 40,
   },
   NavBar: {
     height: (Platform.OS === 'ios') ? Layouts.navBarHeight : (Layouts.navBarHeight-2),
