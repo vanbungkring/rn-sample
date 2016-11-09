@@ -3,6 +3,8 @@
 import React, { Component } from 'react';
 import { View, Text, StyleSheet, Image, TouchableOpacity, Alert } from 'react-native';
 
+import { Actions } from 'react-native-router-flux';
+
 import GLOBAL from '../../constants/Global';
 // https://github.com/TylerLH/react-native-timeago
 import TimeAgo from 'react-native-timeago';
@@ -41,75 +43,6 @@ class Row extends Component {
 
   }
 
-  addHttps(uri){
-    return (uri?uri.replace("http", "https"):uri);
-  }
-
-  imgTransform(url, transform) {
-      transform = transform == null ? 'h_100,q_80,c_fit' : transform;
-      var pattern = /upload/i;
-      var newPattern = 'upload/' + transform;
-      //url = url !== null ? url.replace(pattern, newPattern) : url;
-      if (typeof url !== "undefined") {
-        url = url.replace(pattern, newPattern);
-        url = url.replace("http", "https");
-      } else {
-        url = url
-      }
-      return url;
-  }
-
-  renderDonationProgress(){
-    return(
-      <View style={styles.donationProgress}>
-        <Text style={styles.viewText}> 122 / 222</Text>
-        <Text style={styles.viewText}> 122 / 222</Text>
-      </View>
-    );
-  }
-
-  renderFooter(data){
-    // 3=project
-    if (data.postType==3) {
-      return(
-        //{this.renderDonationProgress()}
-        <View>
-          <View style={styles.donationProgress}>
-            <Text style={[styles.viewText, styles.progressAmt]}> $xx / ${data.project.fundRaisingMax}</Text>
-            <Text style={styles.viewText}> raised by xx donors</Text>
-            <Progress.Bar color={GLOBAL.COLOR.MP_GREEN} unfilledColor={'#ccc'} progress={0.9} borderRadius={2} width={320} height={5} borderWidth={0} style={styles.progressBar}/>
-            <TouchableOpacity activeOpacity={0.8} style={[styles.btnDonate, styles.btnDonateProject]} onPress={this._goToDonate.bind(this, this.props)}>
-              <Text style={styles.donateText}>DONATE TO THIS PROJECT</Text>
-            </TouchableOpacity>
-          </View>
-          <View style={styles.footer}>
-            <View style={styles.leftContainer}>
-              <TouchableOpacity activeOpacity={0.8} style={styles.btnShare} onPress={this._sharePost.bind(this, this.props)}>
-                <Text style={styles.shareText}>SHARE</Text>
-              </TouchableOpacity>
-            </View>
-            <Text style={styles.viewText}> {data.views} Views</Text>
-          </View>
-        </View>
-      );
-    } else {
-      return(
-        <View style={styles.footer}>
-          <View style={styles.leftContainer}>
-            <TouchableOpacity activeOpacity={0.8} underlayColor='#35b5ff' style={styles.btnShare} onPress={this._sharePost.bind(this, this.props)}>
-              <Text style={styles.shareText}>SHARE</Text>
-            </TouchableOpacity>
-            <Text style={styles.viewText}> {data.views} Views</Text>
-          </View>
-          <TouchableOpacity activeOpacity={0.8} underlayColor='#35b5ff' style={styles.rightContainer,styles.btnDonate} onPress={this._goToDonate.bind(this, this.props)}>
-            <Text style={styles.donateText}>DONATE NOW</Text>
-          </TouchableOpacity>
-        </View>
-      );
-    }
-
-  }
-
   _sharePost = (data) => {
     let shareOptions = {
       title: data.postMeta.title,
@@ -121,29 +54,24 @@ class Row extends Component {
     Share.open(shareOptions);
   }
 
-  _postDetail(data) {
-    this.props.navigator.push(Router.getRoute('postdetail', {data: data}));
-  }
 
-  _goToDonate(data) {
-    this.props.navigator.push(Router.getRoute('donate', {data: data._creator}));
-  }
 
   render(){
-    var data = this.props;
+    let data = this.props;
     // console.log('data.attachments[0]==>' + JSON.stringify(data.attachments[0].images));
-    var imageParent = data.attachments[0];
+    let imageParent = data.attachments[0];
+    let viewNews = () => Actions.ViewNews({post: data});
     console.log(imageParent);
+
     return(
       <View style={styles.container}>
-        <TouchableOpacity activeOpacity={1} onPress={this._postDetail.bind(this, this.props)}>
+        <TouchableOpacity activeOpacity={1} onPress={viewNews}>
+          { (data.thumbnail) && <Image style={styles.imageContent} source={{uri:data.thumbnail}}/>}
           <Text style={styles.title}>{data.title}</Text>
-          <Text style={styles.title}>{data.thumbnail}</Text>
           <HTMLView
             value={data.excerpt}
           />
         </TouchableOpacity>
-
       </View>
 
     );
@@ -160,6 +88,10 @@ var styles = StyleSheet.create({
     borderBottomColor: '#bbb',
     borderBottomWidth: 1.5,
     borderRadius: 3
+  },
+  imageContent: {
+    height: 100,
+    width: 200,
   },
   header: {
     flex: 1,

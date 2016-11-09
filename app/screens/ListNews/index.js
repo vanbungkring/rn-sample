@@ -73,10 +73,8 @@ export default class ListNews extends Component {
     if (!this.state.loaded) {
       return this.renderLoadingView();
     }
-    const goToPageTwo = () => Actions.ViewNews({text: 'Hello World!'});
     return (
-      <View style={{marginTop: 150}}>
-        <Text onPress={goToPageTwo}>Press to go to next page</Text>
+      <View style={GlobalStyles.container}>
         <ListView
           refreshControl={
             <RefreshControl
