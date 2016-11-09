@@ -133,11 +133,12 @@ class Row extends Component {
     var data = this.props;
     // console.log('data.attachments[0]==>' + JSON.stringify(data.attachments[0].images));
     var imageParent = data.attachments[0];
+    console.log(imageParent);
     return(
       <View style={styles.container}>
         <TouchableOpacity activeOpacity={1} onPress={this._postDetail.bind(this, this.props)}>
           <Text style={styles.title}>{data.title}</Text>
-          <Text style={styles.title}>{imageParent.images.medium.url}</Text>
+          <Text style={styles.title}>{data.thumbnail}</Text>
           <HTMLView
             value={data.excerpt}
           />
