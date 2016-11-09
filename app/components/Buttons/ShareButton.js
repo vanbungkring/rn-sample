@@ -4,6 +4,8 @@ import React from 'react';
 
 import { View, Text, Image, TouchableOpacity, StyleSheet } from 'react-native';
 
+import Colors from '../../constants/Colors';
+
 // https://github.com/EstebanFuentealba/react-native-share
 import Share, {ShareSheet, Button} from 'react-native-share';
 
@@ -35,11 +37,23 @@ class ShareButton extends React.Component {
 
 var styles = StyleSheet.create({
     button: {
-      marginRight: 10,
+      marginRight: 15,
+      borderWidth: StyleSheet.hairlineWidth,
+      borderColor: 'rgba(0,0,0,0.2)',
+      backgroundColor: 'rgba(255,255,255,.6)',
+      borderRadius: 16,
+      width: 32,
+      height: 32,
+      justifyContent: 'center',
+      alignItems: 'center',
     },
     buttonImg: {
-      tintColor: 'white',
       marginTop: 0,
+      tintColor: Colors.themeRed,
+      // marginTop: 2,
+      width: 20,
+      height: 20,
+      marginLeft: 5,
     }
 });
 

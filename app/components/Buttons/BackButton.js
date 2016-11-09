@@ -3,6 +3,7 @@
 import React from 'react';
 
 import { View, Text, Image, TouchableOpacity, StyleSheet } from 'react-native';
+import Colors from '../../constants/Colors';
 
 class BackButton extends React.Component {
   render() {
@@ -19,12 +20,29 @@ class BackButton extends React.Component {
 
 var styles = StyleSheet.create({
     button: {
-      marginLeft: 8,
-      // flex: 1,
+      marginLeft: 12,
+      borderWidth: StyleSheet.hairlineWidth,
+      borderColor: 'rgba(0,0,0,0.2)',
+      backgroundColor: 'rgba(255,255,255,.6)',
+      borderRadius: 16,
+      width: 32,
+      height: 32,
+      justifyContent: 'center',
+      alignItems: 'center',
+      // shadowColor: "#000000",
+      // shadowOpacity: 0.8,
+      // shadowRadius: 1,
+      // shadowOffset: {
+      //   height: 1,
+      //   width: 0
+      // }
     },
     buttonImg: {
-      tintColor: 'white',
-      marginTop: 2,
+      tintColor: Colors.themeRed,
+      // marginTop: 2,
+      width: 20,
+      height: 20,
+
     }
 });
 

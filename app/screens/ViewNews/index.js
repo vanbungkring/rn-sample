@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { View, Text, Image, StyleSheet, ScrollView,
   StatusBar,
-  Dimensions
+  Dimensions,
+  Linking,
 } from 'react-native';
 import { Actions } from 'react-native-router-flux';
 
@@ -21,7 +22,7 @@ export default class ViewNews extends Component {
   render() {
     const { onScroll = () => {} } = this.props;
     let data = this.props.post;
-    let parallaxHeaderHeight = (data.thumbnail) ? 180 : 50;
+    let PARALLAX_HEADER_HEIGHT = (data.thumbnail) ? 180 : 70;
     return (
       <View style={GlobalStyles.containerNoNavBar}>
         <StatusBar hidden={true} />
@@ -34,8 +35,9 @@ export default class ViewNews extends Component {
           backgroundSpeed={10}
 
           renderBackground={() => (
-            <View key="background">
+            <View key="background" style={{backgroundColor: Colors.themeRed}}>
               <Image source={{uri: data.thumbnail,
+                              backgroundColor: 'green',
                               width: window.width,
                               height: PARALLAX_HEADER_HEIGHT}}/>
               <View style={{position: 'absolute',
@@ -65,7 +67,9 @@ export default class ViewNews extends Component {
           >
 
           <View style={styles.content}>
-            <Text style={styles.title}>{data.title}</Text>
+            <Text style={styles.title}>
+              <HTMLView style={styles.title} value={data.title}/>
+            </Text>
             <HTMLView value={data.content} />
           </View>
         </ParallaxScrollView>
@@ -102,7 +106,7 @@ class FixedHeader extends Component {
 const window = Dimensions.get('window');
 
 // const AVATAR_SIZE = 120;
-const PARALLAX_HEADER_HEIGHT = 180;
+// const PARALLAX_HEADER_HEIGHT = 180;
 const STICKY_HEADER_HEIGHT = 70;
 
 var styles = StyleSheet.create({
@@ -130,7 +134,7 @@ var styles = StyleSheet.create({
     top: 0,
     left: 0,
     width: window.width,
-    height: PARALLAX_HEADER_HEIGHT,
+    // height: PARALLAX_HEADER_HEIGHT,
     // backgroundColor: 'green'
   },
   stickySection: {
@@ -146,7 +150,7 @@ var styles = StyleSheet.create({
   },
   fixedSection: {
     position: 'absolute',
-    bottom: 25,
+    bottom: 20,
     // right: 10,
     // backgroundColor: 'red',
 
