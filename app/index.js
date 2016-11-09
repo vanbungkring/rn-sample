@@ -10,7 +10,7 @@ export default class App extends Component {
       <Router>
         <Scene key="root">
           <Scene key="ListNews" component={ListNews} title="Islami.co" initial={true} />
-          <Scene key="ViewNews" component={ViewNews} title="News Title" />
+          <Scene key="ViewNews" component={ViewNews} title="News Title" hideNavBar={true} />
         </Scene>
       </Router>
     )

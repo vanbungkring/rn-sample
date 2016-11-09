@@ -14,6 +14,12 @@ const GlobalStyles = StyleSheet.create({
     margin: 0,
     marginTop: (Platform.OS === 'ios') ? 64 : 54,
   },
+  containerNoNavBar: {
+    flex: 1,
+    backgroundColor: 'white',
+    padding: 0,
+    margin: 0,
+  },
   NavBar: {
     height: (Platform.OS === 'ios') ? Layouts.navBarHeight : (Layouts.navBarHeight-2),
     // justifyContent: 'center',
