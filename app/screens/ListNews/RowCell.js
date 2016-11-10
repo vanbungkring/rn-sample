@@ -138,7 +138,7 @@ var styles = StyleSheet.create({
   shareText: {
     marginRight: 20,
     fontSize: 12,
-    color: GLOBAL.COLOR.MP_GREEN
+    // color: GLOBAL.COLOR.MP_GREEN
 
   },
 

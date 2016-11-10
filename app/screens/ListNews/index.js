@@ -5,16 +5,17 @@ import {
   RefreshControl,
   ActivityIndicator,
   StyleSheet,
+  StatusBar
  } from 'react-native';
 import { Actions } from 'react-native-router-flux';
 
 
-import GLOBAL from '../../constants/Global';
+import Api from '../../helper/Api';
 import GlobalStyles from '../../constants/Styles';
 import Row from './RowCell';
 
 // var API_URL = 'https://facebook.github.io/react-native/movies.json'
-var API_URL = 'http://islami.co/api/get_recent_posts/';
+var API_URL = Api.getRecentPosts;
 
 
 export default class ListNews extends Component {
@@ -75,6 +76,7 @@ export default class ListNews extends Component {
     }
     return (
       <View style={GlobalStyles.container}>
+        <StatusBar hidden={false} />
         <ListView
           refreshControl={
             <RefreshControl

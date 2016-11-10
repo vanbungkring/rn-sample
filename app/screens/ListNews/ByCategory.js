@@ -9,13 +9,12 @@ import {
 import { Actions } from 'react-native-router-flux';
 
 
-import GLOBAL from '../../constants/Global';
+import Api from '../../helper/Api';
 import GlobalStyles from '../../constants/Styles';
 import Row from './RowCell';
 
 // var API_URL = 'https://facebook.github.io/react-native/movies.json'
-var API_URL = 'http://islami.co/api/get_category_posts/?id=';
-
+var API_URL = Api.getCategoryPostsById;
 
 export default class ListNews extends Component {
   constructor(props) {

@@ -33,9 +33,9 @@ const GlobalStyles = StyleSheet.create({
     alignSelf: 'center',
     marginTop: 22,
   },
-  NavBarModal: {
-    backgroundColor: GLOBAL.COLOR.MP_GREY,
-  },
+  // NavBarModal: {
+  //   backgroundColor: GLOBAL.COLOR.MP_GREY,
+  // },
   titleNavBar: {
     fontSize: 16,
     paddingTop: (Platform.OS === 'ios') ? 20 : 10,
@@ -47,9 +47,9 @@ const GlobalStyles = StyleSheet.create({
     paddingHorizontal:5,
     marginHorizontal: 25,
   },
-  tabBarUnderlineStyle: {
-    backgroundColor: GLOBAL.COLOR.MP_GREEN
-  },
+  // tabBarUnderlineStyle: {
+  //   backgroundColor: GLOBAL.COLOR.MP_GREEN
+  // },
   activityIndicator: {
       alignItems: 'center',
       justifyContent: 'center',
@@ -65,9 +65,9 @@ const GlobalStyles = StyleSheet.create({
     flex: 1,
     alignSelf: 'stretch',
   },
-  link: {
-    color: GLOBAL.COLOR.MP_GREEN,
-  },
+  // link: {
+  //   color: GLOBAL.COLOR.MP_GREEN,
+  // },
   dotPostImage: {
     backgroundColor: '#fff',
     width: 8,
