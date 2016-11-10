@@ -14,7 +14,7 @@ import GlobalStyles from '../../constants/Styles';
 import Row from './RowCell';
 
 // var API_URL = 'https://facebook.github.io/react-native/movies.json'
-var API_URL = 'http://islami.co/api/get_recent_posts/';
+var API_URL = 'http://islami.co/api/get_category_posts/?id=';
 
 
 export default class ListNews extends Component {
@@ -34,7 +34,7 @@ export default class ListNews extends Component {
   }
 
   fetchData() {
-    fetch(API_URL, {
+    fetch(API_URL+this.props.cat.id, {
       method: 'GET',
       headers: {
         'Accept': 'application/json',
@@ -83,6 +83,7 @@ export default class ListNews extends Component {
             />
           }
           dataSource={this.state.dataSource}
+          // renderRow={this.renderList}
           renderRow={(data) => <Row {...data} />}
           style={styles.listView}
         />
@@ -102,8 +103,20 @@ export default class ListNews extends Component {
     );
   }
 
+  renderList(data) {
+    //console.log('gambar--'+data.postMeta.images[0]);
+    return (
+      <View style={styles.container}>
+        <View style={styles.rightContainer}>
+          <Text style={styles.title}>{data.title}</Text>
+          <Text style={styles.title}>{data.releaseYear}</Text>
+        </View>
+      </View>
+    );
+  }
 
 }
+
 
 
 

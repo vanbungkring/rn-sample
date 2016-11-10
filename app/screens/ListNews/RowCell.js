@@ -6,12 +6,13 @@ import { View, Text, StyleSheet, Image, TouchableOpacity, Alert } from 'react-na
 import { Actions } from 'react-native-router-flux';
 
 import GLOBAL from '../../constants/Global';
+import Layouts from '../../constants/Layouts';
 // https://github.com/TylerLH/react-native-timeago
 import TimeAgo from 'react-native-timeago';
 import Moment from 'moment';
 import Striptags from 'striptags';
 import HTMLView from 'react-native-htmlview';
-import { BlurView, VibrancyView } from 'react-native-blur';
+// import { BlurView, VibrancyView } from 'react-native-blur';
 
 // https://github.com/oblador/react-native-progress
 // import * as Progress from 'react-native-progress';
@@ -68,16 +69,17 @@ class Row extends Component {
     return(
       <View style={styles.container}>
         <TouchableOpacity activeOpacity={1} onPress={viewNews}>
+          <Text style={styles.title}>
+            <HTMLView value={data.title} />
+          </Text>
           { (data.thumbnail) && <Image style={styles.imageContent} source={{uri:data.thumbnail}}/>}
-          <Image source={{uri:data.thumbnail}} style={styles.imageContent}>
-            <BlurView blurType="light" blurAmount={60} style={styles.blur}>
-              <Text>Hi, I am a tiny menu item</Text>
-            </BlurView>
-          </Image>
-          <Text style={styles.title}>{data.title}</Text>
-          <HTMLView
-            value={data.excerpt}
-          />
+          <View style={styles.wrapContent}>
+            <HTMLView
+              value={data.excerpt}
+              stylesheet={content}
+            />
+          </View>
+
         </TouchableOpacity>
       </View>
 
@@ -85,38 +87,31 @@ class Row extends Component {
   }
 }
 
+var content = StyleSheet.create({
+  p: {
+    padding: 10,
+  }
+
+})
+
 var styles = StyleSheet.create({
   container: {
     backgroundColor: '#F5FCFF',
     borderWidth: StyleSheet.hairlineWidth,
-    margin: 5,
-    padding: 5,
+    marginVertical: 5,
+    paddingTop: 10,
     borderColor: '#ccc',
     borderBottomColor: '#bbb',
     borderBottomWidth: 1.5,
-    borderRadius: 3
+    borderRadius: 0
   },
   imageContent: {
-    height: 100,
-    width: 200,
+    height: 150,
+    width: Layouts.window.width,
+    marginBottom: 10,
   },
-  header: {
-    flex: 1,
-    flexDirection: 'row',
-    height:50,
-    padding: 4,
-  },
-  accThumbnail: {
-    width: 35,
-    height: 35,
-    borderRadius: 17,
-    // backgroundColor: 'gray',
-    marginRight: 8,
-    marginTop: 0,
-  },
-  accName: {
-    fontSize:13,
-    color:'#777'
+  wrapContent: {
+    paddingHorizontal: 10,
   },
   publishDate: {
     color: '#999',
@@ -124,90 +119,28 @@ var styles = StyleSheet.create({
     marginTop:2,
   },
   title: {
-    fontSize: 14,
+    fontSize: 16,
     marginBottom: 8,
     textAlign: 'left',
-    color: '#666',
+    color: '#222',
+    paddingHorizontal: 10,
+    fontWeight: '700',
   },
   image: {
     height: 150,
     // paddingHorizontal: -15,
     marginHorizontal: -5,
   },
-  donationProgress: {
-    // flex: 1,
-    alignItems:'center',
-    paddingVertical: 8,
-    //alignSelf: 'stretch',
-    // borderColor: 'red',
-    // borderWidth: 1,
-
-  },
-  progressBar: {
-    marginVertical: 6,
-    alignItems: 'stretch',
-    flexDirection: 'row',
+  content: {
+    paddingHorizontal: 10,
   },
 
-  footer: {
-    flex:1,
-    flexDirection: 'row',
-    alignItems:'center',
-    justifyContent: 'center',
-    borderTopColor: '#E5E4E2',
-    borderTopWidth: StyleSheet.hairlineWidth,
-    height: 40,
-    // justifyContent: 'space-between',
-    paddingTop: 4,
-    paddingHorizontal: 7
-  },
-  leftContainer: {
-    flex: 1,
-    flexDirection: 'row',
-    justifyContent: 'flex-start',
-    // backgroundColor: 'green',
-    width: 100,
-  },
-  centerContainer: {
-    fontSize: 12,
-  },
-  rightContainer: {
-    flex: 1,
-    flexDirection: 'row',
-    width: 5,
-
-  },
   shareText: {
     marginRight: 20,
     fontSize: 12,
     color: GLOBAL.COLOR.MP_GREEN
 
   },
-  donateText: {
-    fontSize: 10,
-    alignItems: 'center',
-    color: 'white'
-  },
-  viewText: {
-    fontSize: 12,
-    color: GLOBAL.COLOR.MP_GREY
-  },
-
-  btnDonate: {
-    backgroundColor: GLOBAL.COLOR.MP_ORANGE,
-    height: 26,
-    borderRadius:15,
-    justifyContent: 'center',
-    paddingHorizontal: 10
-  },
-  btnDonateProject: {
-    paddingHorizontal: 50,
-  },
-  progressAmt: {
-    fontSize: 14,
-    fontWeight: 'bold',
-    color: '#555'
-  }
 
 
 

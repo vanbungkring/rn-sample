@@ -12,7 +12,7 @@ const GlobalStyles = StyleSheet.create({
     backgroundColor: 'white',
     padding: 0,
     margin: 0,
-    marginTop: (Platform.OS === 'ios') ? 64 : 54,
+    // marginTop: (Platform.OS === 'ios') ? 64 : 54,
   },
   containerNoNavBar: {
     flex: 1,
@@ -22,12 +22,16 @@ const GlobalStyles = StyleSheet.create({
   },
   NavBar: {
     height: (Platform.OS === 'ios') ? Layouts.navBarHeight : (Layouts.navBarHeight-2),
-    // justifyContent: 'center',
-    // alignItems: 'center',
-    backgroundColor: GLOBAL.COLOR.MP_GREEN,
-    // flexDirection: 'row',
-    paddingTop: (Platform.OS === 'ios') ? 23 : 20,
-    marginTop: (Platform.OS === 'ios') ? -20 : 0,
+    backgroundColor: Colors.themeRed,
+    // paddingTop: (Platform.OS === 'ios') ? 23 : 20,
+    // marginTop: (Platform.OS === 'ios') ? -20 : 0,
+    // borderWidth: 1,
+  },
+  navbarImage: {
+    height: 30,
+    width: 150,
+    alignSelf: 'center',
+    marginTop: 22,
   },
   NavBarModal: {
     backgroundColor: GLOBAL.COLOR.MP_GREY,
