@@ -76,7 +76,7 @@ export default class App extends Component {
               <Scene
                 key='main'
                 navigationBarStyle={GlobalStyles.NavBar}
-                hideNavBar={false}
+                hideNavBar={false} hideTabBar
                 // drawerImage={<Image source={drawerIcon} style={styles.drawerIcon}/>}
 
               >
@@ -87,7 +87,6 @@ export default class App extends Component {
             <Scene key='ViewNews' component={ViewNews} title='News Title' hideNavBar={true} />
 
           </Scene>
-          <Scene key='error' component={Error} />
         </Scene>
       </Router>
     );

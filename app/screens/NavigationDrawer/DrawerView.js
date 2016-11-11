@@ -24,7 +24,7 @@ const TabView = (props, context) => {
     return (
       <View key={i} style={styles.catWrap}>
         <Image source={catIcon} style={styles.catIcon}/>
-        <Button style={styles.catTitle} onPress={() => { drawer.close(); Actions.ListNewsByCat({catId: cat.id, title: cat.title, type: ActionConst.RESET}); }}>{cat.title}</Button>
+        <Button style={styles.catTitle} onPress={() => { drawer.close(); Actions.ListNewsByCat({catId: cat.id, title: cat.title, type: ActionConst.PUSH}); }}>{cat.title}</Button>
       </View>
     );
   });
