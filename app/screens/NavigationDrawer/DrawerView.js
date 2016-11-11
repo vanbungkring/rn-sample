@@ -1,8 +1,8 @@
-import React from 'react';
-import {PropTypes} from "react";
-import {StyleSheet, Text, View, StatusBar, ScrollView} from "react-native";
+'use strict';
+import React, { PropTypes } from 'react';
+import {StyleSheet, Text, View, StatusBar, ScrollView, Image} from 'react-native';
 import Button from 'react-native-button';
-import { Actions } from 'react-native-router-flux';
+import { Actions, ActionConst } from 'react-native-router-flux';
 
 const contextTypes = {
   drawer: React.PropTypes.object,
@@ -18,17 +18,20 @@ const TabView = (props, context) => {
   const drawer = context.drawer;
   const json = require('./category.json');
   const categories = json.categories;
-  console.log('categories==> '+JSON.stringify(categories));
+  // console.log('categories==> '+JSON.stringify(categories));
+  const catIcon = require('../../assets/icons/category.png');
   const catItems = categories.map((cat, i) => {
     return (
-      <View key={cat.id} style={styles.catWrap}>
-        <Button style={styles.catTitle} onPress={() => { drawer.close(); Actions.ListNewsByCat({cat: cat, title: cat.title}); }}>{cat.title}</Button>
+      <View key={i} style={styles.catWrap}>
+        <Image source={catIcon} style={styles.catIcon}/>
+        <Button style={styles.catTitle} onPress={() => { drawer.close(); Actions.ListNewsByCat({catId: cat.id, title: cat.title, type: ActionConst.RESET}); }}>{cat.title}</Button>
       </View>
     );
   });
   return (
     <View style={[styles.container ]}>
       <StatusBar hidden={true} />
+      <Button style={styles.home} onPress={() => { drawer.close(); Actions.ListNews(); }}>Home</Button>
       <Text style={styles.catHeader}>Category</Text>
       <ScrollView>
         {catItems}
@@ -50,11 +53,17 @@ const styles = StyleSheet.create({
     // borderWidth: 1,
     borderColor: 'red',
   },
+  home: {
+    paddingHorizontal: 10,
+    paddingVertical: 15,
+    paddingTop: 34,
+  },
   catHeader: {
     backgroundColor: '#383C41',
     color: '#A8B2C0',
     paddingHorizontal: 10,
-    paddingVertical: 15,
+    paddingVertical: 10,
+    // paddingTop: 32,
     fontSize: 18,
   },
   catWrap: {
@@ -64,14 +73,19 @@ const styles = StyleSheet.create({
     borderBottomColor: '#000000',
     paddingVertical: 10,
     paddingHorizontal: 10,
-
+    flexDirection: 'row'
+  },
+  catIcon: {
+    width: 25,
+    height: 25,
+    tintColor: '#A8B2C0',
+    marginRight: 10,
   },
   catTitle: {
     fontSize: 18,
     color: '#A8B2C0',
     alignSelf:'flex-start',
     fontWeight: 'normal',
-
   }
 });
 

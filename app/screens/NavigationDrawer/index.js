@@ -1,4 +1,7 @@
+'use strict';
 import React, { PropTypes } from 'react';
+import { Image, StyleSheet } from 'react-native';
+
 import Drawer from 'react-native-drawer';
 import { DefaultRenderer, Actions } from 'react-native-router-flux';
 
@@ -12,6 +15,8 @@ class NavigationDrawer extends React.Component {
   render() {
     const state = this.props.navigationState;
     const children = state.children;
+    const drawerIcon = require('../../assets/icons/hamburger.png');
+
     return (
       <Drawer
         ref="navigation"
@@ -26,6 +31,7 @@ class NavigationDrawer extends React.Component {
         tweenHandler={(ratio) => ({
           main: { opacity: Math.max(0.54, 1 - ratio) },
         })}
+        drawerImage={<Image source={drawerIcon} style={styles.drawerIcon}/>}
       >
         <DefaultRenderer navigationState={children[0]} onNavigate={this.props.onNavigate} />
       </Drawer>
@@ -34,5 +40,12 @@ class NavigationDrawer extends React.Component {
 }
 
 NavigationDrawer.propTypes = propTypes;
+
+var styles = StyleSheet.create({
+  drawerIcon: {
+    width: 30,
+    height: 30,
+  }
+});
 
 export default NavigationDrawer;

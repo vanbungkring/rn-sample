@@ -1,13 +1,14 @@
 'use strict';
 
 import React from 'react';
+import { View, Image, TouchableOpacity, StyleSheet } from 'react-native';
+// import { Actions } from 'react-native-router-flux';
 
-import { View, Text, Image, TouchableOpacity, StyleSheet } from 'react-native';
-import Colors from '../../constants/Colors';
+// import Colors from '../../constants/Colors';
 
 class BackButton extends React.Component {
   render() {
-    let onPress = () => Actions.pop();
+    // let onPress = () => Actions.pop();
     return (
       <View style={styles.button}>
         <TouchableOpacity onPress={this.props.onPress}>

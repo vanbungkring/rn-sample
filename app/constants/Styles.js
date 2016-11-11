@@ -1,8 +1,7 @@
 'use strict';
 
-import React from 'react';
-import { StyleSheet,Platform } from 'react-native';
-import GLOBAL from '../constants/Global';
+import { StyleSheet, Platform } from 'react-native';
+// import GLOBAL from '../constants/Global';
 import Colors from '../constants/Colors';
 import Layouts from '../constants/Layouts';
 
@@ -21,17 +20,20 @@ const GlobalStyles = StyleSheet.create({
     margin: 0,
   },
   NavBar: {
-    height: (Platform.OS === 'ios') ? Layouts.navBarHeight : (Layouts.navBarHeight-2),
+    height: (Platform.OS === 'ios') ? Layouts.navBarHeight : (Layouts.navBarHeight-0),
     backgroundColor: Colors.themeRed,
     // paddingTop: (Platform.OS === 'ios') ? 23 : 20,
     // marginTop: (Platform.OS === 'ios') ? -20 : 0,
     // borderWidth: 1,
+    // justifyContent: 'center',
+    paddingTop: (Platform.OS === 'ios') ? 0 : 10,
+
   },
   navbarImage: {
     height: 30,
     width: 150,
     alignSelf: 'center',
-    marginTop: 22,
+    top: (Platform.OS === 'ios') ? 22 : 10,
   },
   // NavBarModal: {
   //   backgroundColor: GLOBAL.COLOR.MP_GREY,

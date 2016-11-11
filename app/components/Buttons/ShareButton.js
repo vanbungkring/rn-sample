@@ -2,14 +2,17 @@
 
 import React from 'react';
 
-import { View, Text, Image, TouchableOpacity, StyleSheet } from 'react-native';
+import { View, Image, TouchableOpacity, StyleSheet } from 'react-native';
 
-import Colors from '../../constants/Colors';
 
 // https://github.com/EstebanFuentealba/react-native-share
-import Share, {ShareSheet, Button} from 'react-native-share';
+import Share, {
+  // ShareSheet,
+  // Button
+} from 'react-native-share';
 
-import GLOBAL from '../../constants/Global';
+// import GLOBAL from '../../constants/Global';
+// import Colors from '../../constants/Colors';
 
 class ShareButton extends React.Component {
   render() {
@@ -22,7 +25,7 @@ class ShareButton extends React.Component {
     );
   }
 
-  _sharePost = () => {
+  _sharePost(){
     let shareOptions = {
       title: this.props.title,
       message: this.props.title,

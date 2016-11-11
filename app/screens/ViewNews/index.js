@@ -1,28 +1,50 @@
+'use strict';
 import React, { Component } from 'react';
 import { View, Text, Image, StyleSheet, ScrollView,
   StatusBar,
   Dimensions,
   Linking,
+  Platform,
 } from 'react-native';
-import { Actions } from 'react-native-router-flux';
+import { Actions, ActionConst } from 'react-native-router-flux';
 
 import GlobalStyles from '../../constants/Styles';
 import Colors from '../../constants/Colors';
 // https://github.com/TylerLH/react-native-timeago
-import TimeAgo from 'react-native-timeago';
+// import TimeAgo from 'react-native-timeago';
 import Moment from 'moment';
-import Striptags from 'striptags';
+// import Striptags from 'striptags';
 import HTMLView from 'react-native-htmlview';
 import ParallaxScrollView from 'react-native-parallax-scroll-view';
 
 import BackButton from '../../components/Buttons/BackButton';
 import ShareButton from '../../components/Buttons/ShareButton';
+import NavBarTitleImage from '../../components/NavBarTitleImage';
+
 
 export default class ViewNews extends Component {
+
+  handleClick(url){
+    Linking.canOpenURL(url).then(supported => {
+      if (supported) {
+        Linking.openURL(url);
+      } else {
+        // console.log('Don\'t know how to open URI: ' + url);
+      }
+    });
+  }
+
   render() {
     const { onScroll = () => {} } = this.props;
     let data = this.props.post;
     let PARALLAX_HEADER_HEIGHT = (data.thumbnail) ? 180 : 70;
+    let listNewsByCat = () => {
+      Actions.ListNewsByCat({
+        catId: data.categories[0].id,
+        title: data.categories[0].title,
+        type: ActionConst.RESET});
+    };
+
     return (
       <View style={GlobalStyles.containerNoNavBar}>
         <StatusBar hidden={true} />
@@ -57,7 +79,7 @@ export default class ViewNews extends Component {
 
           renderStickyHeader={() => (
             <View key="sticky-header" style={styles.stickySection}>
-              <Text style={styles.stickySectionText}>Islami.co</Text>
+              <NavBarTitleImage />
             </View>
           )}
 
@@ -67,16 +89,24 @@ export default class ViewNews extends Component {
           >
 
           <View style={styles.content}>
+            <View style={styles.header}>
+              <Text onPress={listNewsByCat} style={styles.category}>{data.categories[0].title.toUpperCase()}</Text>
+              <Text style={styles.date}>{Moment(data.date).format('D/M/YYYY')}</Text>
+            </View>
             <Text style={styles.title}>
               <HTMLView style={styles.title} value={data.title}/>
             </Text>
-            <HTMLView value={data.content} />
+            <HTMLView
+              value={data.content.replace(/\r?\n|\r/g, '')}
+              stylesheet={htmlViewStyles}
+              onLinkPress={(url) => this.handleClick(url) }
+            />
           </View>
         </ParallaxScrollView>
 
       </View>
 
-    )
+    );
   }
 }
 
@@ -99,7 +129,7 @@ class FixedHeader extends Component {
           />
         </View>
       </View>
-    )
+    );
   }
 }
 
@@ -109,18 +139,32 @@ const window = Dimensions.get('window');
 // const PARALLAX_HEADER_HEIGHT = 180;
 const STICKY_HEADER_HEIGHT = 70;
 
+var htmlViewStyles = StyleSheet.create({
+  // a: {
+  //   color: '#3b5998',
+  // },
+  p: {
+    borderWidth: 1,
+    padding:0,
+    marginBottom:0,
+    color: Colors.defaultTextColor,
+  },
+});
+
 var styles = StyleSheet.create({
   // container: {
   //   // borderWidth:1,
   //   // borderColor: 'red',
   // },
   content:{
-    paddingHorizontal: 15
+    paddingHorizontal: 10,
+    backgroundColor: 'white',
   },
   title: {
     fontSize: 18,
     marginTop: 10,
     marginBottom: 12,
+    color: '#333',
   },
   right: {
     alignItems: 'flex-end'
@@ -128,6 +172,18 @@ var styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: Colors.themeRed
+  },
+  header: {
+    flexDirection: 'row',
+    paddingTop: 10,
+  },
+  category: {
+    color: '#9C0606',
+    fontWeight: '700',
+    marginRight: 15,
+  },
+  date: {
+    color: '#555'
   },
   background: {
     position: 'absolute',
@@ -139,10 +195,11 @@ var styles = StyleSheet.create({
   },
   stickySection: {
     height: STICKY_HEADER_HEIGHT,
-    // width: 300,
-    justifyContent: 'center',
+    // justifyContent: 'center',
     backgroundColor: Colors.themeRed,
-    alignItems: 'center'
+    // alignItems: 'center',
+    paddingTop: (Platform.OS === 'ios') ? 0 : 10,
+
   },
   stickySectionText: {
     color: 'white',

@@ -1,3 +1,4 @@
+'use strict';
 import React, { Component } from 'react';
 import {
   View, Text,
@@ -6,7 +7,7 @@ import {
   ActivityIndicator,
   StyleSheet,
  } from 'react-native';
-import { Actions } from 'react-native-router-flux';
+// import { Actions } from 'react-native-router-flux';
 
 
 import Api from '../../helper/Api';
@@ -25,15 +26,23 @@ export default class ListNews extends Component {
         }),
         loaded: false,
         refreshing: false,
+        catId: this.props.catId,
       };
     }
 
   componentDidMount() {
+    this.setState({ catId: this.props.catId });
     this.fetchData();
   }
 
+  componentWillReceiveProps() {
+    // console.log('Item count on componentWillReceiveProps:', props.items.length);
+    this.setState({ catId: this.props.catId});
+    // console.log('catId==> '+this.state.catId);
+  }
+
   fetchData() {
-    fetch(API_URL+this.props.cat.id, {
+    fetch(API_URL+this.state.catId, {
       method: 'GET',
       headers: {
         'Accept': 'application/json',
@@ -82,12 +91,11 @@ export default class ListNews extends Component {
             />
           }
           dataSource={this.state.dataSource}
-          // renderRow={this.renderList}
           renderRow={(data) => <Row {...data} />}
           style={styles.listView}
         />
       </View>
-    )
+    );
   }
 
   renderLoadingView() {

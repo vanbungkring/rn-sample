@@ -1,10 +1,11 @@
+'use strict';
 const tintColor = '#2f95dc';
 const mpGreen = '#149517';
 const mpOrange = '#E2772E';
 const mpGrey = 'grey';
 const mpWhite = 'white';
 const mpLightGrey = '#D0D0D0';
-const defaultTextColor = '#777';
+const defaultTextColor = '#333';
 const themeRed = '#9C0606';
 
 export default {

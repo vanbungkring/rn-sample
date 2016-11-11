@@ -1,13 +1,14 @@
+'use strict';
 import React, { Component } from 'react';
 import {
-  View, Text,
+  View,
   ListView,
   RefreshControl,
   ActivityIndicator,
   StyleSheet,
   StatusBar
  } from 'react-native';
-import { Actions } from 'react-native-router-flux';
+// import { Actions } from 'react-native-router-flux';
 
 
 import Api from '../../helper/Api';
@@ -76,7 +77,7 @@ export default class ListNews extends Component {
     }
     return (
       <View style={GlobalStyles.container}>
-        <StatusBar hidden={false} />
+        <StatusBar hidden={false} barStyle="light-content" />
         <ListView
           refreshControl={
             <RefreshControl
@@ -89,7 +90,7 @@ export default class ListNews extends Component {
           style={styles.listView}
         />
       </View>
-    )
+    );
   }
 
   renderLoadingView() {

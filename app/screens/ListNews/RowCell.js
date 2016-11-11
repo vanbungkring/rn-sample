@@ -1,16 +1,17 @@
 'use strict';
 
 import React, { Component } from 'react';
-import { View, Text, StyleSheet, Image, TouchableOpacity, Alert } from 'react-native';
+import { View, Text, StyleSheet, Image, TouchableOpacity } from 'react-native';
 
-import { Actions } from 'react-native-router-flux';
+import { Actions, ActionConst } from 'react-native-router-flux';
 
-import GLOBAL from '../../constants/Global';
+// import GLOBAL from '../../constants/Global';
 import Layouts from '../../constants/Layouts';
+import Colors from '../../constants/Colors';
 // https://github.com/TylerLH/react-native-timeago
-import TimeAgo from 'react-native-timeago';
+// import TimeAgo from 'react-native-timeago';
 import Moment from 'moment';
-import Striptags from 'striptags';
+// import Striptags from 'striptags';
 import HTMLView from 'react-native-htmlview';
 // import { BlurView, VibrancyView } from 'react-native-blur';
 
@@ -45,37 +46,30 @@ class Row extends Component {
 
   }
 
-  _sharePost = (data) => {
-    let shareOptions = {
-      title: data.postMeta.title,
-      message: data.postMeta.title,
-      url: GLOBAL.PUBLIC_URL+'/'+data._id,
-      subject: data.postMeta.title //  for email
-    };
-    //alert('hello!');
-    Share.open(shareOptions);
-  }
-
-
-
   render(){
     let data = this.props;
     // console.log('data.attachments[0]==>' + JSON.stringify(data.attachments[0].images));
-    let imageParent = data.attachments[0];
     let viewNews = () => Actions.ViewNews({post: data});
-    console.log(imageParent);
-    const background = 'http://iphonewallpapers-hd.com/thumbs/firework_iphone_wallpaper_5-t2.jpg';
-
+    let listNewsByCat = () => {
+      Actions.ListNewsByCat({
+        catId: data.categories[0].id,
+        title: data.categories[0].title,
+        type: ActionConst.RESET});
+    };
     return(
       <View style={styles.container}>
         <TouchableOpacity activeOpacity={1} onPress={viewNews}>
+          <View style={styles.header}>
+            <Text onPress={listNewsByCat} style={styles.category}>{data.categories[0].title.toUpperCase()}</Text>
+            <Text style={styles.date}>{Moment(data.date).format('D/M/YYYY')}</Text>
+          </View>
           <Text style={styles.title}>
             <HTMLView value={data.title} />
           </Text>
           { (data.thumbnail) && <Image style={styles.imageContent} source={{uri:data.thumbnail}}/>}
           <View style={styles.wrapContent}>
             <HTMLView
-              value={data.excerpt}
+              value={data.excerpt.trim().replace(/\r?\n|\r/g, '')}
               stylesheet={content}
             />
           </View>
@@ -89,10 +83,12 @@ class Row extends Component {
 
 var content = StyleSheet.create({
   p: {
-    padding: 10,
-  }
-
-})
+    borderWidth: 1,
+    padding:0,
+    marginBottom:0,
+    color: Colors.defaultTextColor,
+  },
+});
 
 var styles = StyleSheet.create({
   container: {
@@ -105,6 +101,19 @@ var styles = StyleSheet.create({
     borderBottomWidth: 1.5,
     borderRadius: 0
   },
+  header: {
+    flexDirection: 'row',
+    paddingHorizontal: 10,
+    paddingBottom: 10,
+  },
+  category: {
+    color: '#9C0606',
+    fontWeight: '700',
+    marginRight: 15,
+  },
+  date: {
+    color: '#555'
+  },
   imageContent: {
     height: 150,
     width: Layouts.window.width,
@@ -112,6 +121,7 @@ var styles = StyleSheet.create({
   },
   wrapContent: {
     paddingHorizontal: 10,
+    paddingBottom: 15,
   },
   publishDate: {
     color: '#999',
@@ -138,7 +148,7 @@ var styles = StyleSheet.create({
   shareText: {
     marginRight: 20,
     fontSize: 12,
-    // color: GLOBAL.COLOR.MP_GREEN
+    // color: Colors.defaultTextColor
 
   },
 
