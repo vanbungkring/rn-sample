@@ -14,8 +14,6 @@ import {
   ActionConst,
 } from 'react-native-router-flux';
 
-// import Button from 'react-native-button';
-
 import GlobalStyles from './constants/Styles';
 
 import NavigationDrawer from './screens/NavigationDrawer';
@@ -63,7 +61,8 @@ const getSceneStyle = (/* NavigationSceneRendererProps */ props, computedProps) 
 
 export default class App extends Component {
   render() {
-    // const drawerIcon = require('./assets/icons/hamburger.png');
+    const drawerIcon = require('./assets/icons/hamburger.png');
+    const backIcon = require('./assets/icons/leftArrow.png');
 
     return (
       <Router createReducer={reducerCreate} getSceneStyle={getSceneStyle}>
@@ -77,7 +76,8 @@ export default class App extends Component {
                 key='main'
                 navigationBarStyle={GlobalStyles.NavBar}
                 hideNavBar={false} hideTabBar
-                // drawerImage={<Image source={drawerIcon} style={styles.drawerIcon}/>}
+                backButtonImage={backIcon}
+                drawerImage={drawerIcon}
 
               >
                 <Scene key='ListNews' component={ListNews} renderTitle={()=><NavBarTitleImage />} type={ActionConst.RESET} initial={true} />

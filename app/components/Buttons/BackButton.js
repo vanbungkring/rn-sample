@@ -9,10 +9,11 @@ import { View, Image, TouchableOpacity, StyleSheet } from 'react-native';
 class BackButton extends React.Component {
   render() {
     // let onPress = () => Actions.pop();
+    const leftArrowIcon = require('../../assets/icons/leftArrow.png');
     return (
       <View style={styles.button}>
         <TouchableOpacity onPress={this.props.onPress}>
-          <Image style={styles.buttonImg} source={require('../../assets/icons/leftArrow.png')}/>
+          <Image style={styles.buttonImg} source={leftArrowIcon}/>
         </TouchableOpacity>
       </View>
     );

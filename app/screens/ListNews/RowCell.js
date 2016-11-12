@@ -5,7 +5,7 @@ import { View, Text, StyleSheet, Image, TouchableOpacity } from 'react-native';
 
 import { Actions, ActionConst } from 'react-native-router-flux';
 
-// import GLOBAL from '../../constants/Global';
+import GlobalStyles from '../../constants/Styles';
 import Layouts from '../../constants/Layouts';
 import Colors from '../../constants/Colors';
 // https://github.com/TylerLH/react-native-timeago
@@ -20,7 +20,8 @@ import HTMLView from 'react-native-htmlview';
 // https://github.com/EstebanFuentealba/react-native-share
 // import Share, {ShareSheet} from 'react-native-share';
 
-// import Button from '../../components/Buttons/Button';
+import ShareButton from '../../components/Buttons/ShareButton';
+
 
 class Row extends Component {
   constructor(props) {
@@ -59,14 +60,25 @@ class Row extends Component {
     return(
       <View style={styles.container}>
         <TouchableOpacity activeOpacity={1} onPress={viewNews}>
-          <View style={styles.header}>
-            <Text onPress={listNewsByCat} style={styles.category}>{data.categories[0].title.toUpperCase()}</Text>
-            <Text style={styles.date}>{Moment(data.date).format('D/M/YYYY')}</Text>
+          <View style={[GlobalStyles.parentRow, styles.header]}>
+            <View style={[GlobalStyles.row, styles.left]}>
+              <Text onPress={listNewsByCat} style={styles.category}>{data.categories[0].title.toUpperCase()}</Text>
+              <Text style={styles.date}>{Moment(data.date).format('D/M/YYYY')}</Text>
+            </View>
+            <View style={[GlobalStyles.row, styles.right]}>
+              <ShareButton
+                title={data.title}
+                url={data.url}
+                message={data.title}
+                subject={data.title}
+                style={[styles.shareButton]}
+              />
+            </View>
           </View>
           <Text style={styles.title}>
             <HTMLView value={data.title} />
           </Text>
-          { (data.thumbnail) && <Image style={styles.imageContent} source={{uri:data.thumbnail}}/>}
+          { (data.thumbnail) && <Image style={styles.imageContent} source={{uri:data.thumbnail_images.medium.url}}/>}
           <View style={styles.wrapContent}>
             <HTMLView
               value={data.excerpt.trim().replace(/\r?\n|\r/g, '')}
@@ -102,12 +114,12 @@ var styles = StyleSheet.create({
     borderRadius: 0
   },
   header: {
-    flexDirection: 'row',
     paddingHorizontal: 10,
+    paddingTop: 8,
     paddingBottom: 10,
   },
   category: {
-    color: '#9C0606',
+    color: Colors.themeRed,
     fontWeight: '700',
     marginRight: 15,
   },
@@ -141,17 +153,20 @@ var styles = StyleSheet.create({
     // paddingHorizontal: -15,
     marginHorizontal: -5,
   },
-  content: {
-    paddingHorizontal: 10,
+  shareButton: {
+    tintColor: Colors.themeRed,
   },
-
-  shareText: {
-    marginRight: 20,
-    fontSize: 12,
-    // color: Colors.defaultTextColor
-
+  left: {
+    flexDirection: 'row',
   },
-
+  right: {
+    // borderWidth: 1,
+    flex: 0.25,
+    alignItems: 'flex-end',
+    top: -5,
+    right: 0,
+    position: 'absolute',
+  }
 
 
 });

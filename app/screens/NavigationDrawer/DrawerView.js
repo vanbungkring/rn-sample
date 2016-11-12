@@ -1,7 +1,7 @@
 'use strict';
 import React, { PropTypes } from 'react';
-import {StyleSheet, Text, View, StatusBar, ScrollView, Image} from 'react-native';
-import Button from 'react-native-button';
+import {StyleSheet, Text, View, StatusBar, ScrollView, Image, TouchableOpacity} from 'react-native';
+// import Button from 'react-native-button';
 import { Actions, ActionConst } from 'react-native-router-flux';
 
 const contextTypes = {
@@ -22,17 +22,22 @@ const TabView = (props, context) => {
   const catIcon = require('../../assets/icons/category.png');
   const catItems = categories.map((cat, i) => {
     return (
-      <View key={i} style={styles.catWrap}>
-        <Image source={catIcon} style={styles.catIcon}/>
-        <Button style={styles.catTitle} onPress={() => { drawer.close(); Actions.ListNewsByCat({catId: cat.id, title: cat.title, type: ActionConst.PUSH}); }}>{cat.title}</Button>
-      </View>
+      <TouchableOpacity key={i} onPress={() => { drawer.close(); Actions.ListNewsByCat({catId: cat.id, title: cat.title, type: ActionConst.PUSH}); }}>
+        <View style={styles.catWrap}>
+          <Image source={catIcon} style={styles.catIcon}/>
+          <Text style={styles.catTitle}>{cat.title}</Text>
+        </View>
+      </TouchableOpacity>
     );
   });
   return (
     <View style={[styles.container ]}>
       <StatusBar hidden={true} />
-      <Button style={styles.home} onPress={() => { drawer.close(); Actions.ListNews(); }}>Home</Button>
-      <Text style={styles.catHeader}>Category</Text>
+      <TouchableOpacity onPress={() => { drawer.close(); Actions.ListNews(); }}>
+        <Text style={styles.home}>Depan</Text>
+      </TouchableOpacity>
+
+      <Text style={styles.catHeader}>Kategori</Text>
       <ScrollView>
         {catItems}
       </ScrollView>
@@ -57,6 +62,9 @@ const styles = StyleSheet.create({
     paddingHorizontal: 10,
     paddingVertical: 15,
     paddingTop: 34,
+    color: 'white',
+    fontSize: 18,
+    alignSelf: 'center',
   },
   catHeader: {
     backgroundColor: '#383C41',
@@ -76,10 +84,11 @@ const styles = StyleSheet.create({
     flexDirection: 'row'
   },
   catIcon: {
-    width: 25,
-    height: 25,
+    width: 20,
+    height: 20,
     tintColor: '#A8B2C0',
-    marginRight: 10,
+    marginRight: 15,
+    marginLeft: 5,
   },
   catTitle: {
     fontSize: 18,

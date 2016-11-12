@@ -8,7 +8,7 @@ export default class NavBarTitleImage extends Component {
   render() {
     const navbarImage = require('../../assets/images/logo.png');
     return(
-      <Image source={navbarImage} style={GlobalStyles.navbarImage}/>
+      <Image source={navbarImage} style={[GlobalStyles.navbarImage, this.props.style]}/>
     );
   }
 }

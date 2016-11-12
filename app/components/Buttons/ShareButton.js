@@ -19,7 +19,7 @@ class ShareButton extends React.Component {
     return (
       <View style={styles.button}>
         <TouchableOpacity onPress={this._sharePost.bind(this)}>
-          <Image style={styles.buttonImg}source={require('../../assets/icons/share.png')}/>
+          <Image style={[styles.buttonImg, this.props.style]}source={require('../../assets/icons/share.png')}/>
         </TouchableOpacity>
       </View>
     );
@@ -40,7 +40,7 @@ class ShareButton extends React.Component {
 
 var styles = StyleSheet.create({
     button: {
-      marginRight: 10,
+      marginRight: 5,
       // borderWidth: StyleSheet.hairlineWidth,
       // borderColor: 'rgba(0,0,0,0.2)',
       // backgroundColor: 'rgba(255,255,255,.6)',

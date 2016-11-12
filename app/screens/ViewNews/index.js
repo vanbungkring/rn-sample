@@ -38,6 +38,7 @@ export default class ViewNews extends Component {
     const { onScroll = () => {} } = this.props;
     let data = this.props.post;
     let PARALLAX_HEADER_HEIGHT = (data.thumbnail) ? 180 : 70;
+    let bgColor = (data.thumbnail) ? 'rgba(0,0,0,0.1)' : Colors.themeRed;
     let listNewsByCat = () => {
       Actions.ListNewsByCat({
         catId: data.categories[0].id,
@@ -58,20 +59,23 @@ export default class ViewNews extends Component {
 
           renderBackground={() => (
             <View key="background" style={{backgroundColor: Colors.themeRed}}>
-              <Image source={{uri: data.thumbnail,
-                              backgroundColor: 'green',
+              { (data.thumbnail) &&
+              <Image source={{uri: data.thumbnail_images.medium.url,
+                              backgroundColor: Colors.themeRed,
                               width: window.width,
                               height: PARALLAX_HEADER_HEIGHT}}/>
+              }
               <View style={{position: 'absolute',
                             top: 0,
                             width: window.width,
-                            backgroundColor: 'rgba(0,0,0,.2)',
+                            backgroundColor: bgColor,
                             height: PARALLAX_HEADER_HEIGHT}}/>
+
             </View>
           )}
 
           renderForeground={() => (
-            <View key="parallax-header" style={ styles.parallaxHeader }>
+            <View key="parallax-header" style={ [{backgroundColor: bgColor}, styles.parallaxHeader] }>
               <Text style={ styles.sectionTitleText }>
               </Text>
             </View>
@@ -79,7 +83,9 @@ export default class ViewNews extends Component {
 
           renderStickyHeader={() => (
             <View key="sticky-header" style={styles.stickySection}>
+            { (data.thumbnail) &&
               <NavBarTitleImage />
+            }
             </View>
           )}
 
@@ -120,12 +126,18 @@ class FixedHeader extends Component {
         <View style={[GlobalStyles.row]}>
           <BackButton onPress={goBack} />
         </View>
+        { (!data.thumbnail) &&
+          <View style={[GlobalStyles.row, styles.center]}>
+            <NavBarTitleImage style={styles.navbarImage}/>
+          </View>
+        }
         <View style={[GlobalStyles.row, styles.right]}>
           <ShareButton
             title={data.title}
             url={data.url}
             message={data.title}
             subject={data.title}
+            style={styles.shareButton}
           />
         </View>
       </View>
@@ -166,6 +178,12 @@ var styles = StyleSheet.create({
     marginBottom: 12,
     color: '#333',
   },
+  // center: {
+  //   borderWidth: 1,
+  // },
+  navbarImage: {
+    top: 0,
+  },
   right: {
     alignItems: 'flex-end'
   },
@@ -178,7 +196,7 @@ var styles = StyleSheet.create({
     paddingTop: 10,
   },
   category: {
-    color: '#9C0606',
+    color: Colors.themeRed,
     fontWeight: '700',
     marginRight: 15,
   },
@@ -211,7 +229,6 @@ var styles = StyleSheet.create({
     bottom: 20,
     // right: 10,
     // backgroundColor: 'red',
-
   },
   fixedSectionText: {
     color: '#999',
@@ -221,7 +238,8 @@ var styles = StyleSheet.create({
     alignItems: 'center',
     flex: 1,
     flexDirection: 'column',
-    paddingTop: 100
+    paddingTop: 100,
+    // backgroundColor: bgColor,
   },
   // avatar: {
   //   marginBottom: 10,
@@ -237,4 +255,7 @@ var styles = StyleSheet.create({
     fontSize: 18,
     paddingVertical: 5
   },
+  shareButton:{
+    marginRight: 10,
+  }
 });
