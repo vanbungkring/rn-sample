@@ -54,6 +54,7 @@ export default class ListNews extends Component {
         this.setState({
           dataSource: this.state.dataSource.cloneWithRows(responseData.posts),
           loaded: true,
+          refreshing: false,
         });
       })
       .catch((error) => {
@@ -64,11 +65,11 @@ export default class ListNews extends Component {
 
   _onRefresh() {
     this.setState({refreshing: true});
-    // fetchData().then(() => {
+    // this.fetchData().then(() => {
     //   this.setState({refreshing: false});
     // });
     this.fetchData();
-    this.setState({refreshing: false});
+    // this.setState({refreshing: false});
   }
 
   render() {
