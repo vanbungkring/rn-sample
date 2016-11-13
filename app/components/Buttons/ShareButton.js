@@ -33,7 +33,9 @@ class ShareButton extends React.Component {
       subject: this.props.title //  for email
     };
     // alert(JSON.stringify(shareOptions));
-    Share.open(shareOptions);
+    Share.open(
+      shareOptions
+    ).catch(err => console.log(err));
   }
 
 }

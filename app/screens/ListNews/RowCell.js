@@ -57,6 +57,9 @@ class Row extends Component {
         title: data.categories[0].title,
         type: ActionConst.RESET});
     };
+    let regex = /(<([^>]+)>)/ig;
+    // var body = "<p>test</p>"
+    // var result = body.replace(regex, "");
     return(
       <View style={styles.container}>
         <TouchableOpacity activeOpacity={1} onPress={viewNews}>
@@ -81,7 +84,7 @@ class Row extends Component {
           { (data.thumbnail) && <Image style={styles.imageContent} source={{uri:data.thumbnail_images.medium.url}}/>}
           <View style={styles.wrapContent}>
             <HTMLView
-              value={data.excerpt.trim().replace(/\r?\n|\r/g, '')}
+              value={data.excerpt.trim().replace(regex, '')}
               stylesheet={content}
             />
           </View>
