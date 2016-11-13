@@ -170,7 +170,8 @@ export default class ListNews extends Component {
   _renderFooter(){
     return(
       <Text style={styles.footer} onPress={this._backToTop}>
-        --o0o--
+        { (this.state.currentPage>=this.state.totalPages) && '--o0o--' }
+        { (this.state.currentPage>1 && !this.state.loaded) && 'Memuat ...' }
       </Text>
     );
   }
