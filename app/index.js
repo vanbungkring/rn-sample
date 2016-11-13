@@ -22,6 +22,12 @@ import ListNewsByCat from './screens/ListNews/ByCategory';
 import ViewNews from './screens/ViewNews';
 import NavBarTitleImage from './components/NavBarTitleImage';
 
+
+// Forces a native crash for testing
+// import Fabric from 'react-native-fabric';
+// var { Crashlytics } = Fabric;
+// Crashlytics.crash();
+
 // const styles = StyleSheet.create({
 //   container: { flex: 1, backgroundColor: 'transparent', justifyContent: 'center',
 //     alignItems: 'center',

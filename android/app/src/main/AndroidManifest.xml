@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.islamico"
-    android:versionCode="1"
-    android:versionName="1.0">
+    android:versionCode="4"
+    android:versionName="1.2">
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW"/>
@@ -26,6 +26,11 @@
         </intent-filter>
       </activity>
       <activity android:name="com.facebook.react.devsupport.DevSettingsActivity" />
+
+      <meta-data
+        android:name="io.fabric.ApiKey"
+        android:value="4165a61ef093b00352a634db8c625bdbd68ff756"
+      />
     </application>
 
 </manifest>

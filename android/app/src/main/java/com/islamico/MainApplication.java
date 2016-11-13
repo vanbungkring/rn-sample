@@ -12,7 +12,17 @@ import com.facebook.react.shell.MainReactPackage;
 import java.util.Arrays;
 import java.util.List;
 
+import com.crashlytics.android.Crashlytics;
+import io.fabric.sdk.android.Fabric;
+import com.smixx.fabric.FabricPackage;
+
 public class MainApplication extends Application implements ReactApplication {
+
+  @Override
+  public void onCreate() {
+      super.onCreate();
+      Fabric.with(this, new Crashlytics());
+  }
 
   private final ReactNativeHost mReactNativeHost = new ReactNativeHost(this) {
     @Override
@@ -23,6 +33,7 @@ public class MainApplication extends Application implements ReactApplication {
     @Override
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
+          new FabricPackage(),
           new MainReactPackage()
       );
     }
