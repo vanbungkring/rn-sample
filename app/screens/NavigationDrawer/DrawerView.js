@@ -32,7 +32,7 @@ const TabView = (props, context) => {
   });
   return (
     <View style={[styles.container ]}>
-      <StatusBar hidden={true} />
+      <StatusBar hidden={false} barStyle="light-content" />
       <TouchableOpacity onPress={() => { drawer.close(); Actions.ListNews(); }}>
         <Text style={styles.home}>Depan</Text>
       </TouchableOpacity>
